@@ -11,3 +11,4 @@ rooms:
     fields:
         - {id: department, title: Отдел, type: char}     
         - {id: spots, title: Вместимость, type: int}
+

@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.db.models.fields import (CharField, IntegerField, DateField)
 import yaml
 
+
 def yaml_to_field(f_type, title):
     if f_type == 'date':
         y_f = DateField(title)
@@ -14,8 +15,8 @@ def yaml_to_field(f_type, title):
     return y_f
 
 
-def load_models():
-    yaml_models = yaml.load(open('models.yaml'))
+def load_models(model_file):
+    yaml_models = yaml.load(open(model_file))
     ready_models = []
     for model in yaml_models:
         model_name = model
@@ -24,8 +25,16 @@ def load_models():
         yaml_fields = yaml_models[model]['fields']
         model_fields = {}
         for field in yaml_fields:
-            f = {field['id']: yaml_to_field(field['type'], field['title'])}
-            model_fields.update(f)
+            if field['type'] == 'int':
+                model_fields[field['id']] = \
+                    models.IntegerField(verbose_name=field['title'])
+            elif field['type'] == 'char':
+                model_fields[field['id']] = \
+                    models.CharField(max_length=255, verbose_name=field['title'])
+            elif field['type'] == 'date':
+                model_fields[field['id']] = \
+                    models.DateField(verbose_name=field['title'])
+
         f = {'__str__': lambda self: '%s' (self.name)}
         model_fields.update(f)
         ready_models.append(create_model(model_name, model_fields, options=model_options, app_label='yammled', admin_opts={}))
@@ -34,10 +43,9 @@ def load_models():
 
 def create_model(name, fields=None, app_label='', module='', options=None, admin_opts=None):
     """
-    Create specified model (from djangoproject wiki)
+      Create specified model (from djangoproject wiki)
     """
     class Meta:
-        # Using type('Meta', ...) gives a dictproxy error during model creation
         pass
 
     if app_label:

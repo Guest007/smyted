@@ -2,12 +2,14 @@
 
 import fabric
 
-print "Start..."
+fabric.load_models('yammled/models/models.yaml')
 
-
-y_models = fabric.load_models()
-print "Model 1: ", y_models[0]
-print "Model 2: ", y_models[1]
-
-
-print "Imported"
+# print "Start..."
+#
+#
+# y_models = fabric.load_models()
+# print "Model 1: ", y_models[0]
+# print "Model 2: ", y_models[1]
+#
+#
+# print "Imported"
