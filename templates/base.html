@@ -1,0 +1,19 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+    <meta charset="UTF-8">
+    <title>Test for SMYT</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+{% block content %}
+
+{% endblock %}
+
+
+</body>
+{% block js %}
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+{% endblock %}
+</html>

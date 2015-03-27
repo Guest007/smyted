@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import TemplateView
 
 
-class Home(ListView):
+class Home(TemplateView):
     template_name = 'yammled/homepage.html'
+
 

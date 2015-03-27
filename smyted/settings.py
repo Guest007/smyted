@@ -39,6 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'inplaceeditform_bootstrap',
+    'inplaceeditform',
+    'inplaceeditform_extra_fields',
+    # 'bootstrap3_datetime',
 
     'yammled',
 )
@@ -57,6 +61,10 @@ ROOT_URLCONF = 'smyted.urls'
 
 WSGI_APPLICATION = 'smyted.wsgi.application'
 
+# ADAPTOR_INPLACEEDIT = {}
+# if 'bootstrap3_datetime' in INSTALLED_APPS:
+#     ADAPTOR_INPLACEEDIT['date'] = 'inplaceeditform_bootstrap.fields.AdaptorDateBootStrapField'
+#     ADAPTOR_INPLACEEDIT['datetime'] = 'inplaceeditform_bootstrap.fields.AdaptorDateTimeBootStrapField'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

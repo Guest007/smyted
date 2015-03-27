@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^$', Home.as_view(), name='home'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^inplaceeditform/', include('inplaceeditform.urls')),
 )
 
 if settings.DEBUG:
