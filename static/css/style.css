@@ -1,6 +1,14 @@
+
+.main {
+    width: 100%;
+}
+
 .left {
-float: left;
+    float: left;
+    width: 25%;
 }
-.content {
-margin-left: 300px;
+
+#content {
+    margin-left: 300px;
 }
+

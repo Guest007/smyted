@@ -2,11 +2,14 @@
 {% load static from staticfiles %}
 
 {% block content %}
-<div id="main">
-<div id="left">
+<div class="main">
+<div class="left">
     <ul>
-        <li>fghjk</li>
-        <li>ghjkl</li>
+
+        {% for item in models %}
+            <li><a href="#{{ item.model }}">{{ item.name }}</a></li>
+        {% endfor %}
+
     </ul>
 </div>
 <div id="content">sfgsdfg</div>
