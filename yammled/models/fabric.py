@@ -6,16 +6,6 @@ import yaml
 from datetime import date
 
 
-# def yaml_to_field(f_type, title):
-#     if f_type == 'date':
-#         y_f = DateField(title)
-#     elif f_type == 'int':
-#         y_f = IntegerField(title)
-#     else:
-#         y_f = CharField(title)
-#     return y_f
-
-
 def load_models(model_file):
     yaml_models = yaml.load(open(model_file))
     ready_models = []
@@ -36,8 +26,6 @@ def load_models(model_file):
                 model_fields[field['id']] = \
                     DateField(verbose_name=field['title'], default=date.today())
 
-        # f = {'__str__': lambda self: '%s' (self.name)}
-        # model_fields.update(f)
         ready_models.append(create_model(model_name,
                                          model_fields,
                                          options=model_options,
