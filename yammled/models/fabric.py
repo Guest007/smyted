@@ -21,7 +21,8 @@ def load_models(model_file):
                     IntegerField(verbose_name=field['title'], default=0)
             elif field['type'] == 'char':
                 model_fields[field['id']] = \
-                    CharField(max_length=255, verbose_name=field['title'], default='')
+                    CharField(max_length=255, verbose_name=field['title'],
+                              default='')
             elif field['type'] == 'date':
                 model_fields[field['id']] = \
                     DateField(verbose_name=field['title'], default=date.today())
@@ -35,7 +36,8 @@ def load_models(model_file):
     return ready_models
 
 
-def create_model(name, fields=None, app_label='', module='', options=None, admin_opts=None):
+def create_model(name, fields=None, app_label='', module='',
+                 options=None, admin_opts=None):
     """
       Create specified model (from djangoproject wiki)
     """
