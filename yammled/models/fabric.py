@@ -3,16 +3,17 @@ from django.db import models
 from django.contrib import admin
 from django.db.models.fields import (CharField, IntegerField, DateField)
 import yaml
+from datetime import date
 
 
-def yaml_to_field(f_type, title):
-    if f_type == 'date':
-        y_f = DateField(title)
-    elif f_type == 'int':
-        y_f = IntegerField(title)
-    else:
-        y_f = CharField(title)
-    return y_f
+# def yaml_to_field(f_type, title):
+#     if f_type == 'date':
+#         y_f = DateField(title)
+#     elif f_type == 'int':
+#         y_f = IntegerField(title)
+#     else:
+#         y_f = CharField(title)
+#     return y_f
 
 
 def load_models(model_file):
@@ -27,17 +28,22 @@ def load_models(model_file):
         for field in yaml_fields:
             if field['type'] == 'int':
                 model_fields[field['id']] = \
-                    models.IntegerField(verbose_name=field['title'])
+                    IntegerField(verbose_name=field['title'], default=0)
             elif field['type'] == 'char':
                 model_fields[field['id']] = \
-                    models.CharField(max_length=255, verbose_name=field['title'])
+                    CharField(max_length=255, verbose_name=field['title'], default='')
             elif field['type'] == 'date':
                 model_fields[field['id']] = \
-                    models.DateField(verbose_name=field['title'])
+                    DateField(verbose_name=field['title'], default=date.today())
 
-        f = {'__str__': lambda self: '%s' (self.name)}
-        model_fields.update(f)
-        ready_models.append(create_model(model_name, model_fields, options=model_options, app_label='yammled', admin_opts={}))
+        # f = {'__str__': lambda self: '%s' (self.name)}
+        # model_fields.update(f)
+        ready_models.append(create_model(model_name,
+                                         model_fields,
+                                         options=model_options,
+                                         app_label='yammled',
+                                         admin_opts={})
+                            )
     return ready_models
 
 
