@@ -84,7 +84,6 @@ var drawForm = function(model) {
 // Check type of changed cell
 var getClickedType = function(cell) {
     var col = cell.parent().children().index(cell);
-    console.log(cfgData[currentModel]['fields'][col-1]['type']);
     return cfgData[currentModel]['fields'][col-1]['type'];
 };
 
@@ -134,7 +133,6 @@ var cellIsValid = function(cType, cData) {
 var checkOnChange = function() {
     $('body')
         .on('focus', '[contenteditable]', function() {
-            console.log(data);
             $(this).data('before', $(this).html());
         })
         .on('blur', '[contenteditable]', function() {
