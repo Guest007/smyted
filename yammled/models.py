@@ -101,6 +101,7 @@ def create_model(name, fields=None, app_label='', module='',
 
     return model
 
-m_file = 'yammled/models.yaml'
+from django.conf import settings
+m_file = settings.YAML_PATH
 tables = load_models(m_file)
 models_data = get_models(m_file)
