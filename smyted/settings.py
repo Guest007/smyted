@@ -39,10 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'inplaceeditform_bootstrap',
-    'inplaceeditform',
-    'inplaceeditform_extra_fields',
-    # 'bootstrap3_datetime',
 
     'yammled',
 )
