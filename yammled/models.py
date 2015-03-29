@@ -4,17 +4,37 @@ from django.contrib import admin
 from django.db.models.fields import (CharField, IntegerField, DateField)
 import yaml
 from datetime import date
+from django.forms import ModelForm
+
+
+def get_models(model_file):
+    """
+        load models from file to dict
+    :param model_file:
+    :return:
+    """
+    models = yaml.load(open(model_file))
+    return models
 
 
 def load_models(model_file):
-    yaml_models = yaml.load(open(model_file))
+    """
+        get file and return models
+    :param model_file:
+    :return:
+    """
+    yaml_models = get_models(model_file)
     ready_models = []
     for model in yaml_models:
-        model_name = model
+        model_name = model.capitalize()
+
         model_title = yaml_models[model]['title']
         model_options = {'verbose_name': model_title}
         yaml_fields = yaml_models[model]['fields']
-        model_fields = {}
+        model_fields = {
+            '__module__': __name__,
+            'id': models.AutoField(primary_key=True)
+        }
         for field in yaml_fields:
             if field['type'] == 'int':
                 model_fields[field['id']] = \
@@ -27,12 +47,20 @@ def load_models(model_file):
                 model_fields[field['id']] = \
                     DateField(verbose_name=field['title'], default=date.today())
 
-        ready_models.append(create_model(model_name,
+        new_model = create_model(model_name,
                                          model_fields,
                                          options=model_options,
                                          app_label='yammled',
                                          admin_opts={})
-                            )
+        ready_models.append(new_model)
+        globals()[model_name] = new_model
+
+        # ModelForms is very similar to models creation. Do it directly
+        form_name = "{0}Form".format(model_name)
+        globals()[form_name] = type(form_name, (ModelForm,), {
+            'Meta': type('Meta', (object,), {'model': new_model, 'fields': '__all__'})
+        })
+
     return ready_models
 
 
@@ -73,3 +101,6 @@ def create_model(name, fields=None, app_label='', module='',
 
     return model
 
+m_file = 'yammled/models.yaml'
+tables = load_models(m_file)
+models_data = get_models(m_file)

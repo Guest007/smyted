@@ -5,15 +5,20 @@
     <meta charset="UTF-8">
     <title>Test for SMYT</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="//dbushell.github.io/Pikaday/css/pikaday.css"/>
 </head>
 <body>
+
 {% block content %}
-
 {% endblock %}
-
 
 </body>
 {% block js %}
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!-- библиотека Momento для форматирования дат -->
+    <script src="//momentjs.com/downloads/moment.min.js"></script>
+    <script src="//dbushell.github.io/Pikaday/pikaday.js"></script>
+    <script src="//dbushell.github.io/Pikaday/plugins/pikaday.jquery.js"></script>
+    <script src="{% static 'js/smyt.js' %}"></script>
 {% endblock %}
 </html>

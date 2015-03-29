@@ -2,16 +2,18 @@
 {% load static from staticfiles %}
 
 {% block content %}
-<div class="main">
-<div class="left">
-    <ul>
-
-        {% for item in models %}
-            <li><a href="#{{ item.model }}">{{ item.name }}</a></li>
-        {% endfor %}
-
-    </ul>
-</div>
-<div id="content">sfgsdfg</div>
-</div>
+<table>
+<tr>
+    <td valign="top">
+        <div id="menu"></div>
+    </td>
+    <td>
+        <table id="tabcontent" cellpadding="2" cellspacing="1" style="background-color:black;">
+        </table>
+        <br>
+        <div id="divform_new_obj">
+        </div>
+    </td>
+</tr>
+</table>
 {% endblock %}
