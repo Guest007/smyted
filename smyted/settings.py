@@ -27,7 +27,9 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'smyt.guest007.tk',
+]
 
 
 # Application definition
